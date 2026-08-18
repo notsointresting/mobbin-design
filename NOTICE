@@ -1,0 +1,33 @@
+mobbin-design
+Copyright (c) 2026 Sahil
+
+This product includes work derived from the Refero design skill
+(https://github.com/referodesign/refero_skill), Copyright (c) 2026 Refero,
+licensed under the MIT License.
+
+The research methodology of this skill — the reference lock, the decision ledger,
+the anti-averaging rules, and the quality gate — is adapted from that project. The
+Mobbin research layer, tool routing, and workflow were rewritten for Mobbin's MCP
+tool surface, which differs substantially from Refero's.
+
+The following files are reused from the Refero design skill with minor edits:
+
+  skills/mobbin-design/references/typography.md
+  skills/mobbin-design/references/color.md
+  skills/mobbin-design/references/motion.md
+  skills/mobbin-design/references/icons.md
+  skills/mobbin-design/references/craft-details.md
+  skills/mobbin-design/references/copywriting.md
+  skills/mobbin-design/references/anti-ai-slop.md
+  skills/mobbin-design/references/visual-workflow.md
+
+These cover general design craft that is not specific to any research source.
+
+The following files are original to this project:
+
+  skills/mobbin-design/SKILL.md
+  skills/mobbin-design/references/mcp-tools.md
+  skills/mobbin-design/references/example-workflow.md
+
+Mobbin is a trademark of its respective owner. This project is an independent,
+unofficial integration and is not affiliated with or endorsed by Mobbin.

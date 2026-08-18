@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "mobbin-design",
+  "displayName": "Mobbin Design",
+  "version": "1.0.0",
+  "description": "Research real product interfaces and design with evidence from Mobbin.",
+  "author": {
+    "name": "Sahil"
+  },
+  "homepage": "https://github.com/notsointresting/mobbin-design",
+  "repository": "https://github.com/notsointresting/mobbin-design",
+  "license": "MIT",
+  "keywords": [
+    "design",
+    "ui",
+    "ux",
+    "product-design",
+    "design-research",
+    "ios",
+    "mcp"
+  ]
+}

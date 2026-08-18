@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "mobbin-design",
+  "description": "Mobbin design research skill and read-only MCP tools.",
+  "owner": {
+    "name": "Sahil"
+  },
+  "plugins": [
+    {
+      "name": "mobbin-design",
+      "source": "./",
+      "description": "Research real product interfaces and design with evidence from Mobbin.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Sahil"
+      },
+      "homepage": "https://github.com/notsointresting/mobbin-design",
+      "repository": "https://github.com/notsointresting/mobbin-design",
+      "license": "MIT",
+      "category": "design"
+    }
+  ]
+}
