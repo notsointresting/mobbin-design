@@ -132,6 +132,12 @@ Clarify:
 - whether the task needs visual direction, concrete UI patterns, journey logic, or a mix
 - whether the task should go directly to code, produce visual options first, or create
   generated assets during implementation
+- **how close to the reference this is meant to land** — see
+  [references/fidelity-ladder.md](references/fidelity-ladder.md). Default to genre-match. If
+  the user asks for a close or "identical" match, run the intake in that file before building:
+  a high-fidelity build without the user's brand, copy, and content produces correct
+  proportions wrapped around invented content, which reads as a template regardless of how
+  well the layout lands.
 
 Brief format:
 
@@ -160,6 +166,11 @@ Choose the lightest workflow that can produce a high-quality result.
   redesign, a review, or a check against an existing lock. Read the build and infer its system
   **before** researching; research done first anchors you to an imagined product. Full
   protocol: [references/design-audit.md](references/design-audit.md).
+- **Teardown:** use when the user asks what a named product contains, how it is structured, or
+  wants it inventoried rather than a single pattern from it. Systematic named-app querying;
+  see [references/product-teardown.md](references/product-teardown.md). Note that Mobbin has
+  no trending, popular, or browse-by-app tool — if asked for trending, say so and ask the user
+  to paste names instead of inventing a list.
 - **Asset generation:** use generated imagery only when the reference lock requires bitmap
   media that code, icons, or existing assets cannot faithfully provide; see
   [references/visual-workflow.md](references/visual-workflow.md).
@@ -626,6 +637,9 @@ Load these when the situation calls for them:
 - Persisting the lock: [references/design-md.md](references/design-md.md) — the `DESIGN.md`
   template and the rules that keep it trustworthy.
 - Auditing an existing build: [references/design-audit.md](references/design-audit.md).
+- Inventorying a named product: [references/product-teardown.md](references/product-teardown.md).
+- How close a match is intended, and what the user must supply for a close one:
+  [references/fidelity-ladder.md](references/fidelity-ladder.md).
 - Mid-build drift: [references/drift-check.md](references/drift-check.md) — mechanical,
   greppable, run at each completed surface.
 - Motion sources: [references/motion-library.md](references/motion-library.md) — named motion

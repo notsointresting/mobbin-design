@@ -23,7 +23,7 @@ and worked code exemplars that set the quality target with artifacts rather than
 /plugin install mobbin-design@mobbin-design
 ```
 
-This installs the skill, two slash commands, and registers the Mobbin MCP server. Run `/mcp`
+This installs the skill, three slash commands, and registers the Mobbin MCP server. Run `/mcp`
 and sign in to Mobbin when prompted.
 
 ### Commands
@@ -32,6 +32,7 @@ and sign in to Mobbin when prompted.
 |---------|--------------|
 | `/mobbin-research <what you are designing>` | Runs the full research protocol and writes a `DESIGN.md` lock. Stops before implementation — the deliverable is research, not code. |
 | `/design-audit <file, directory, URL, or screenshot>` | Reads an existing build, infers its system, researches its specific weaknesses, and reports classified, prioritized findings. |
+| `/teardown <app or site> [ios\|web]` | Inventories what a real product contains — screen inventory, IA tree, component vocabulary, sampled tokens, and what it deliberately refuses to do. |
 
 The skill also activates automatically on design work; the commands exist for when you want
 research and building to happen on different days, or when the target already exists.
@@ -132,6 +133,47 @@ are restated before any code is written.
 The research index is the quiet win — without it, session three re-runs session one's
 searches, gets a different result set, and locks a different direction by accident.
 
+### How close is it supposed to be?
+
+"Make it like Linear" is four different requests. The skill names them rather than answering
+only one:
+
+| Level | From the reference | From you |
+|---|---|---|
+| Inspired-by | one trait | everything else |
+| **Genre-match** (default) | density, structure, conventions | brand, content, identity |
+| High-fidelity | layout, spacing, type scale, motion character | brand, copy, imagery, content |
+| Identical clone | — not built | — |
+
+Level 3 is what most people mean by "identical", and it is legitimate. Level 4 is not built:
+logos, wordmarks, custom typefaces, and illustration systems are protected, and a product
+indistinguishable from a competitor gives nobody a reason to pick it.
+
+The useful part is the **intake**. Most "make it like X" builds fail because the user supplies
+a reference and nothing else, so the agent invents copy and content — and invented content is
+what reads as a template no matter how precise the layout is. So a high-fidelity request
+triggers one intake block up front: brand files and colors, real headlines and CTA text,
+assets or an explicit "none", the surfaces needed, which 3-5 reference traits actually matter,
+which traits to *drop*, and a `DO NOT CHANGE` line for anything already shipped. Everything
+has a default, and every gap is named with the fidelity it costs.
+
+### Teardowns, and what Mobbin can't do
+
+`/teardown Linear web` runs six systematic passes — core screens, structure, account surfaces,
+the edges, journeys, marketing — and returns a screen inventory, an IA tree, the component
+vocabulary with observed rules, sampled token values, and what the product deliberately
+refuses to do.
+
+Two honest limits, stated in the output rather than papered over:
+
+- **There is no "all screens for app X" call.** A teardown samples what Mobbin indexed, via
+  repeated named-app queries walked forward with `exclude_screen_ids`. It reports its coverage
+  gaps.
+- **Trending and popular are not available.** The official server has three search tools and
+  no browse, category, or popularity surface, and `mobbin.com` returns 403 to programmatic
+  fetches. Asked for trending, the skill says so and asks you to paste names instead of
+  inventing a list.
+
 ### Drift check, mid-build
 
 The quality gate runs before handoff, by which point drift has been compounding for hours.
@@ -196,12 +238,15 @@ An answer you cannot write down does not exist. "The colors" is a failing answer
 commands/
   mobbin-research.md              /mobbin-research — research to a committed lock, no code
   design-audit.md                 /design-audit — audit an existing build
+  teardown.md                     /teardown — inventory what a real product contains
 skills/mobbin-design/
   SKILL.md                        the methodology and tool routing
   references/
     exceptional-bar.md            REQUIRED — worked code exemplars + Failure Gallery
     motion-signature.md           REQUIRED — surface tiers, signature moves, motion lock
     design-md.md                  the DESIGN.md lock template and its rules
+    fidelity-ladder.md            how close a match is intended + the user intake spec
+    product-teardown.md           inventory a named product: screens, IA, components, tokens
     design-audit.md               brownfield protocol — read the build, then research
     drift-check.md                mid-build mechanical check against the reject list
     motion-library.md             named motion languages, described concretely enough to cite
