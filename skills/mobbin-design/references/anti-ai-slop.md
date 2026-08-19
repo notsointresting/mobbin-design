@@ -2,6 +2,15 @@
 
 Your design must NOT look AI-generated. AI interfaces converge on the same tired patterns because they optimize for "safe" and "average." Real designers make intentional, contextual choices.
 
+> **Companion file.** This guide catalogs what to *avoid* — the visual tells that mark a
+> design as machine-averaged. Avoiding all of them still leaves you at zero, because "not
+> obviously AI" is not the same as good.
+>
+> For what to build *toward*, read [exceptional-bar.md](exceptional-bar.md): worked code
+> exemplars at the target quality, plus a Failure Gallery covering the structural and
+> interaction tells (uniform padding rhythm, one easing curve everywhere, nothing responding
+> to hover, no `:focus-visible`) that complement the visual tells below.
+
 ---
 
 ## 🚨 THE #1 TELL: INDIGO/VIOLET

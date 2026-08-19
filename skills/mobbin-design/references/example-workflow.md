@@ -35,7 +35,12 @@ mobbin_search_screens  platform=ios  limit=10  query="Bear notes app writing scr
 mobbin_search_screens  platform=ios  limit=10  query="habit tracker weekly progress screen"
 ```
 
-Then **look at all forty screenshots**. Not the app names - the pixels.
+Run these **in batches of two, writing notes after each batch** - not all four at once. Forty
+screenshots accumulated before any synthesis means the earliest images have left context by
+the time they are needed, and the work quietly degrades into designing from app names. Write
+what you saw while you can still see it.
+
+Then **look at the screenshots**. Not the app names - the pixels.
 
 What inspection turns up (stated as reasoned estimates, because these are screenshots and
 not token files):
@@ -120,6 +125,45 @@ Token commitments: bg #FCFCFA warm-neutral; text near-black #1A1A18; accent sing
 The reject list is doing real work here: it is the shame machinery the audience already
 quit, written down so it cannot creep back in during implementation.
 
+Note the token commitments are **values, not adjectives**. "Warm off-white with a single
+blue" would not survive contact with an implementation; `#FCFCFA` and `#2E6BE6` survive as
+themselves. Mobbin has no color-extraction tool, so this is read off the screenshots by eye
+and committed to deliberately.
+
+## 5b. Motion Lock
+
+Mobbin returned forty screenshots and zero frames of motion. It cannot source this, so it
+gets its own lock and its own evidence rule. Skipping this step is how a well-researched
+build still ships feeling like a static mockup.
+
+```text
+Motion direction: Things 3 - motion is short, small, and mechanical. Rows settle rather than
+  bounce; nothing overshoots. Derived from the visual lock: a dense, hairline, type-led
+  system implies fast small motion, not slow springy motion.
+Surface tier: onboarding = onboarding tier (continuity + one expressive beat).
+  paywall = marketing tier (expressive is expected and appropriate).
+Signature move: the paywall's oversized "days practiced" numeral counts up once on first
+  appearance, then stays put. It fits because the whole positioning is accumulated effort
+  surviving missed days - the number arriving by counting is the argument, made visually.
+Easing family: cubic-bezier(0.22, 1, 0.36, 1). Durations 120 / 240 / 420 / 900ms.
+Choreography: onboarding steps slide horizontally in the direction of travel (forward = from
+  the right), matching the user's mental model of progress. Goal rows use the coordinated
+  hover/press pattern - one custom property driving selection ring, background, and a 2px
+  content shift. Paywall plan cards cross-fade on toggle; the selection ring morphs between
+  cards rather than teleporting.
+Deliberately still: the canvas, the dividers, and the CTA. In an app for people burned by
+  gamification, motion that celebrates is exactly wrong. The one animated element earns it.
+Memorable detail: the count-up numeral. One, not two - the borrowed Oak treatment already
+  allows only one oversized figure per screen, and the same discipline applies to motion.
+Reduced-motion plan: numeral renders at its final value immediately; step transitions become
+  instant; the selection ring cross-fades rather than morphing. Feedback is preserved, only
+  the movement is dropped.
+```
+
+Both the count-up and the morphing selection ring have worked implementations in
+[exceptional-bar.md](exceptional-bar.md) (Exemplars 4 and 3). Take the mechanism, not the
+styling.
+
 ## 6. Decision Ledger
 
 | Decision | Source | Source rule / role | Why |
@@ -134,8 +178,12 @@ quit, written down so it cannot creep back in during implementation.
 | Notification prompt after value, not step 1 | Flow pass | permission follows demonstrated value | Higher opt-in and avoids an early hostile moment |
 | Copy: "Miss a day? Nothing resets." | User brief + reject list | product promise, stated plainly | The memorable move; it is the whole positioning in four words |
 | Zero illustration slots | User constraint | code-native only | No budget - an honest type-led screen beats a bad clipart one |
+| Count-up on the days numeral, once | Motion lock signature move | one animated figure per screen; fires once, never re-fires | The positioning is accumulated effort; the number arriving *is* the argument |
+| Selection ring morphs between plan cards | Motion lock + exemplar 3 | continuity mechanism, not decoration | Tells the user the two plans are one choice in two positions |
+| Canvas, dividers, and CTA never move | Motion lock restraint line | stillness is the default; motion is the exception | Audience quit gamified apps; celebratory motion is the failure mode |
 
-Every row traces to a source. A row that traced to nothing would come out.
+Every row traces to a source, including the motion rows. A row that traced to nothing would
+come out.
 
 ## 7. Three Directions, User Picks
 
@@ -170,6 +218,34 @@ Findings from a real pass usually look like:
 
 Do not hand off with P0/P1/P2 open unless genuinely blocked.
 
+## 9. The Naming Gate
+
+Screenshot comparison catches drift from the lock. It does not catch a build that matched
+its lock and is still unremarkable. That is what the naming gate is for - answered out loud,
+in words, before handoff:
+
+1. **Signature interaction.** The days numeral counts up once on the paywall, then holds.
+   It fits because the product's whole claim is that effort accumulates across missed days.
+2. **Motion system.** One curve, `cubic-bezier(0.22, 1, 0.36, 1)`, four durations
+   (120/240/420/900ms). Onboarding moves horizontally with the direction of travel. Canvas,
+   dividers, and CTA are deliberately still.
+3. **Memorable detail.** The count-up numeral - it is also the signature move, which is
+   correct here. One element carrying both is focus, not a shortcut; two competing would be
+   the failure.
+4. **Closest Failure Gallery row.** "One opacity fade-in on scroll, applied to everything."
+   The first draft faded every onboarding block in uniformly. Replaced with directional
+   slides that encode forward and backward travel, so the motion carries meaning instead of
+   marking time.
+5. **Sources.** Things 3 for canvas, type, and accent discipline; Oak for exactly one
+   oversized numeral; the paywall pattern pass for the toggle placement and trial timeline;
+   the flow pass for step count, answer echoing, and the soft dismissal.
+6. **First visible difference from a starter template.** The type scale. A default paywall
+   template puts the price largest; this one puts the accumulated-days figure largest and
+   sets the price at body size. The hierarchy states the argument before a word is read.
+
+Answer six is the one that separates a good build from a template with a new palette. If the
+honest answer had been "the colors", the work would go back.
+
 ## What To Carry Away
 
 - Direction and pattern are **two separate query passes**. Mixing taste words with
@@ -180,3 +256,13 @@ Do not hand off with P0/P1/P2 open unless genuinely blocked.
 - The reject list prevents the slow slide back to generic during implementation.
 - `exclude_screen_ids`, not `page`, is how you get more screens.
 - Link every screen you cite so the user can check your reasoning.
+- **Write notes between batches.** Text survives context compaction; images do not.
+- **Commit color as values.** `#FCFCFA` survives into implementation; "warm off-white" does
+  not.
+- **The motion lock is not optional because Mobbin cannot fill it.** Research grounded the
+  visual system and left motion entirely unsourced - that gap is the single most reliable
+  path to a correct, well-cited, completely forgettable build.
+- **One signature move, named before implementation.** Here it was the count-up numeral, and
+  it was chosen because it argues the product's actual claim, not because it looked nice.
+- **Finish by naming things, not by ticking boxes.** A checklist passes on a flat build; "what
+  is the first visible difference from a starter template?" does not.
