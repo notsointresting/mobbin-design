@@ -5,8 +5,19 @@ prefix (for example `mcp__mobbin__search_screens`). Use the exact tool names sho
 client.
 
 Mobbin exposes **three tools, all of them searches**. There is no detail-fetch tool, no
-style tool, no similarity tool, and no image-by-id tool. Search is retrieval: each call
-returns rendered images inline together with metadata, and that is the complete result.
+style tool, no similarity tool, no color-extraction tool, no taxonomy/filter-facet tool, no
+per-app drill-down tool, and no image-by-id tool. Search is retrieval: each call returns
+rendered images inline together with metadata, and that is the complete result.
+
+**Mobbin returns stills, and holds no motion data.** Nothing here can tell you how an
+interface animates. Motion direction is sourced separately — see
+[motion-signature.md](motion-signature.md). This gap is a sourcing instruction, never a
+reason to ship a static build.
+
+**Color must be sampled by eye.** With no extraction tool, read canvas, surface, text,
+border, and accent values off the screenshot and commit them as hex or oklch, plus the
+accent's approximate screen coverage. Adjectives do not survive into implementation; numbers
+do.
 
 | Layer | Tool | Platforms | Returns |
 |-------|------|-----------|---------|

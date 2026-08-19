@@ -1,5 +1,13 @@
 # Motion & Micro-interactions Guide
 
+> **Scope.** This is the *safety* reference: timing, easing, reduced motion, and the
+> restraint that dense product UI requires. It answers "how do I not make this worse."
+>
+> For heroes, landing pages, marketing surfaces, onboarding, and anything meant to make an
+> impression, read [motion-signature.md](motion-signature.md) instead — it carries the
+> surface-tier table and the signature-move requirement. Applying the restraint below to a
+> marketing surface is the most common cause of basic-looking output.
+
 Motion in product UI serves three purposes. If an animation doesn't do at least one—remove it.
 
 1. **Feedback** — "I pressed this and it worked"

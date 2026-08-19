@@ -62,6 +62,19 @@ research burden.
   explain what will be adapted.
 - **No design from vibe memory.** Every major visual, layout, content, or interaction
   decision must trace to Mobbin research, the user's brief, or a craft reference.
+- **Motion is required, and Mobbin cannot source it.** Mobbin returns still screenshots and
+  holds no motion data. That is a gap in the source, never a licence to ship a static build.
+  Motion direction is sourced from a named product's motion language, derived from the visual
+  lock, or taken from the craft references — all three are valid evidence. Every non-trivial
+  build carries a filled motion lock; see
+  [references/motion-signature.md](references/motion-signature.md).
+- **Ship one signature interaction.** Every non-trivial build includes at least one
+  interaction that cannot be expressed as a single utility class. Name it in the decision
+  ledger before implementation. "Restraint" is a valid defence only when the surface tier
+  calls for it and you say which tier that is.
+- **Read the bar before building.** For any surface with visible design intent, read
+  [references/exceptional-bar.md](references/exceptional-bar.md) before writing
+  implementation code. Prose targets do not raise output quality; worked artifacts do.
 - **Synthesize before implementation.** Turn research into a concept, token direction, and
   concrete decision ledger before drawing or coding.
 - **A brief is not a build target.** Before implementation, lock either a user-provided
@@ -245,6 +258,14 @@ values explicitly as reasoned estimates**. Write "roughly 8px base grid, ~1.25 t
 single blue accent reserved for primary action" rather than silently assuming. Estimates you
 name can be checked and corrected; estimates you hide become invisible drift.
 
+**Sample color as values, not as adjectives.** Mobbin exposes no color-extraction tool, so do
+it by eye and commit to numbers: read the canvas, surface, primary text, secondary text,
+border, and accent off the screenshot and write them as hex or oklch. "A warm off-white
+canvas with a muted blue accent" survives into implementation as `#fff` and `#3b82f6`.
+`#FAF8F5` and `oklch(0.55 0.13 250)` survive as themselves. Name the accent's **coverage**
+too — roughly what percentage of the screen it occupies — because accent discipline is a
+ratio, and it is the trait most often lost in translation.
+
 Synthesis rule:
 
 - Primary reference: overall mood, density, and structure.
@@ -267,6 +288,25 @@ Media strategy: [real/generated/stock/code-native/placeholder, with aspect ratio
 Reject: [defaults/averages that would collapse the direction]
 Token commitments: [background, type, accent, radius, border/shadow, imagery treatment, with roles]
 ```
+
+Then fill the motion lock. It is a separate block because it has a separate evidence rule:
+Mobbin returns stills and cannot source it. Leaving it empty is how a build ships basic.
+
+```text
+Motion direction: [named product's motion language / derived from the visual lock, described concretely]
+Surface tier: [product UI / navigation / onboarding / marketing] -> ceiling: [micro / continuity / expressive]
+Signature move: [name it, and say why it fits this product]
+Easing family: [one curve + the duration scale derived from it]
+Choreography: [entry, scroll response, hover/press, state change, exit]
+Deliberately still: [what does NOT move, and why that restraint is the point]
+Memorable detail: [the one thing a user could describe tomorrow]
+Reduced-motion plan: [what is replaced, not merely removed]
+```
+
+Marketing, hero, landing, and launch surfaces default **up** the motion tiers. Dense product
+UI defaults **down**. Applying product-UI restraint to a marketing surface is the single most
+common cause of basic output. Full tier table and the qualifying-move catalog:
+[references/motion-signature.md](references/motion-signature.md).
 
 If implementation drifts from the lock, stop and correct it. Do not soften distinctive
 traits into safer colors, safer fonts, softer radius, or generic section layouts. Reference
@@ -304,6 +344,28 @@ destructive action confirmation dialog
 Search by facts visible on the screen: page type, component, state, product name, on-screen
 text. Prefer concrete UI terminology over aesthetic adjectives - aesthetic words belong in
 the direction pass, not the pattern pass.
+
+**Query formula.** Translate the abstract product goal into a visible screen description
+before searching. Combine as many of these as apply, in plain language, under 500 characters:
+
+| Ingredient | Examples |
+|------------|----------|
+| Product category | fintech, crypto, banking, SaaS, AI, ecommerce, health, social, dev tools |
+| Screen type | onboarding, dashboard, settings, confirmation, modal, empty state, error state |
+| Visible components | input field, progress bar, tabs, card, warning banner, timeline, bottom sheet |
+| User action | sign up, transfer money, connect wallet, confirm withdrawal, invite teammate |
+| State | loading, pending, failed, completed, empty, disabled, first-run |
+| Trust elements | security message, fee breakdown, confirmation checklist, support link |
+
+The test: could someone draw the screen from your query? If not, it is a concept, not a
+query.
+
+- Do not search: `trust patterns`, `good onboarding`, `transaction confidence`
+- Do search: `bank transfer pending screen showing amount, recipient, estimated arrival
+  time, and progress indicator`
+
+The same rule applies to flows, one level up — describe the journey and what is visible along
+it, not the UX theory behind it.
 
 Extract from screens:
 
@@ -416,6 +478,17 @@ For high-stakes or ambiguous tasks:
 
 Images are expensive. Mobbin returns them on every call, so manage the budget deliberately:
 
+**Analyze incrementally — this is the rule that protects design quality, not just context.**
+Run searches in batches of 2-3, then write your visual observations as **text** before
+running the next batch: app name, `mobbin_url`, layout structure, type treatment, sampled
+colors, spacing feel, the one detail worth taking.
+
+Text survives context compaction. Base64 images do not. If you accumulate every search
+result and only synthesize at the end, the images are gone by synthesis time and you are
+designing from metadata — which is exactly the failure mode that produces generic output.
+The skill's most important rule ("look at the images") silently inverts itself unless you
+write down what you saw while you can still see it.
+
 - Start with `limit` around 8-12 on exploratory searches; raise it only when results are
   clearly too narrow.
 - Prefer several sharp queries over one broad query with a high limit.
@@ -523,12 +596,21 @@ tie it to the user's constraints, or remove it.
 
 ## Design Craft
 
-After research, execute like a senior product designer. Use the bundled references only when
-relevant; do not load every file by default.
+After research, execute like a senior product designer.
+
+Two of these are **not optional** for any surface with visible design intent — read them
+before writing implementation code:
+
+- **The bar:** [references/exceptional-bar.md](references/exceptional-bar.md) — worked code
+  exemplars at the target quality, plus the Failure Gallery of what basic output looks like.
+- **Signature motion:** [references/motion-signature.md](references/motion-signature.md) —
+  surface tiers, the qualifying-move catalog, and how to source motion when Mobbin cannot.
+
+Load the rest only when relevant:
 
 - Typography: [references/typography.md](references/typography.md)
 - Color: [references/color.md](references/color.md)
-- Motion: [references/motion.md](references/motion.md)
+- Motion safety, timing, and reduced-motion: [references/motion.md](references/motion.md)
 - Icons: [references/icons.md](references/icons.md)
 - Forms, focus, images, touch, performance, accessibility: [references/craft-details.md](references/craft-details.md)
 - Copywriting and persuasion: [references/copywriting.md](references/copywriting.md)
@@ -550,37 +632,74 @@ Core craft rules:
   research and product context justify them.
 - Avoid generic hero -> features grid -> pricing -> FAQ -> CTA unless research supports it.
 - Use real product evidence for copy, trust signals, objection handling, and section order.
-- Create at least one memorable detail: a visual move, interaction, layout choice, or copy
-  detail users would remember.
+- Create exactly one memorable detail: a visual move, interaction, layout choice, or copy
+  detail users would remember. One, named in advance — two compete and the page reads busy
+  rather than considered.
+- Define the motion system alongside the token system: one easing family, one duration scale,
+  and a stated decision about what deliberately does not move.
 - Balance headings and short display text with `text-wrap: balance`; use `text-wrap: pretty`
   selectively for prose. Check key breakpoints for orphan words and awkward final lines.
 - Keep accessibility and responsive behavior in the design, not as a late pass.
 
 ## Quality Gate
 
-Before final delivery, confirm:
+A yes/no checklist passes on a flat build, because every answer can be "yes" while the work
+is still generic. So the gate is written as questions that must be answered **by naming
+something**. An answer you cannot write down does not exist.
 
-- Did I actually look at the screenshots rather than design from metadata?
-- Did I run a direction pass separately from a pattern pass?
-- Did I avoid copying one reference directly?
-- Did I synthesize multiple references into a unique direction?
-- Did I avoid averaging references into a safe centroid?
-- Did I preserve the primary reference's signature traits?
-- Did I preserve source token/component roles instead of repurposing them?
-- Did I preserve required imagery/media roles with real assets, appropriate primitives, or
-  intentional placeholders?
-- Did I use flows when the task had multiple steps?
-- Did I use sections when the task was a marketing page?
-- Did I cite `mobbin_url` for every screen I named?
-- Can I name which references influenced the design and why?
-- Can every major design choice be traced to a reference, user constraint, or craft rule?
-- Did I produce a concept and decision ledger before implementation?
-- Does the implementation avoid generic AI design defaults?
-- Did I avoid decorative serif/italic/color word swaps unless reference and content role
-  justify them?
-- Does the result fit the user's product, audience, and constraints?
+### Gate 1 — Name the signature interaction
 
-If the answer is no, research or refine more before delivering.
+What is it, how does it work, and why does it fit this product? If the answer is a hover
+color change, a fade-in, or "kept it clean", the build has not cleared the bar. If restraint
+genuinely is correct, name the surface tier that requires it and what you did instead.
+
+### Gate 2 — Name the motion system
+
+State the easing family, the duration scale, the surface tier, and what deliberately does not
+move. "Some transitions" is not a system. An empty motion lock is a failed gate, not a style
+choice.
+
+### Gate 3 — Name the memorable detail
+
+What would a user describe from memory tomorrow? One thing, specific. If nothing comes to
+mind, nothing is there.
+
+### Gate 4 — Name the Failure Gallery row you came closest to
+
+Open [references/exceptional-bar.md](references/exceptional-bar.md), find the row this build
+was most at risk of matching, and say what you did instead. Answering "none of them" means
+you did not actually check.
+
+### Gate 5 — Name the sources
+
+Every major choice traces to a reference (with `mobbin_url`), a user constraint, or a craft
+rule. Name the primary reference, the traits preserved from it, and the specific details
+borrowed from secondaries. If a choice has no source, remove it or research it.
+
+### Gate 6 — Name the first visible difference
+
+If a screenshot of this build sat beside a default starter template, what is the first
+difference someone would point at? If the honest answer is "the colors", the build is a
+template with a new palette.
+
+### Process checks
+
+Faster, still binary, still worth confirming:
+
+- Looked at the screenshots rather than designing from metadata.
+- Wrote observations as text after each batch, before the images left context.
+- Ran the direction pass separately from the pattern pass.
+- Synthesized several references rather than copying one or averaging all.
+- Preserved token, component, and imagery **roles** from their sources.
+- Used flows for multi-step tasks; used sections for marketing pages.
+- Cited `mobbin_url` for every screen named to the user.
+- Produced a concept, reference lock, motion lock, and decision ledger before implementation.
+- Sampled real color values rather than describing colors as adjectives.
+- Avoided decorative serif/italic/accent word swaps unless the content role justifies them.
+- Result fits the user's product, audience, and constraints.
+
+Any gate answered with a hedge means the work is not finished. Go back and fix the specific
+thing you could not name.
 
 For substantial visual work, run the visual QA pass in
 [references/visual-workflow.md](references/visual-workflow.md) before handoff.

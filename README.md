@@ -9,6 +9,11 @@ pricing → FAQ → CTA skeleton, the same rounded card grid. With it, the agent
 what real products actually shipped, locks a specific direction, and can tell you which
 screen every decision came from.
 
+Research alone does not clear the bar, though. Mobbin returns **still screenshots**, so a
+purely research-grounded build tends to arrive static and safe: correct structure, no
+signature. The skill closes that gap with a motion lock, a required signature interaction,
+and worked code exemplars that set the quality target with artifacts rather than adjectives.
+
 ## Install
 
 ### As a Claude Code plugin
@@ -83,6 +88,25 @@ Reject:             [the defaults that would collapse this direction]
 The `Reject` line is the one that earns its keep. It is where "no indigo gradient, no streak
 grid, no countdown urgency" gets written down so it cannot creep back in at hour three.
 
+### Motion lock
+
+Mobbin holds no motion data, so motion gets its own lock with its own evidence rule — a
+named product's motion language, or a character derived from the visual lock:
+
+```text
+Motion direction:   [named source, described concretely]
+Surface tier:       [product UI / navigation / onboarding / marketing] → ceiling
+Signature move:     [required — one interaction that is not a utility class]
+Easing family:      [one curve + the duration scale derived from it]
+Deliberately still: [what does NOT move, and why]
+Memorable detail:   [the one thing a user could describe tomorrow]
+```
+
+Marketing and hero surfaces default **up** the motion tiers; dense product UI defaults
+**down**. Applying product-UI restraint to a landing page is the most common cause of
+basic-looking output, and an empty `Signature move` line means the build is not ready to
+start.
+
 ### Decision ledger
 
 Every significant choice traces to a source before build starts:
@@ -92,6 +116,20 @@ Every significant choice traces to a source before build starts:
 | Single blue, selection state only | Things 3 direction screens | accent never becomes CTA or badge fill | Keeps the one moment of color meaningful |
 
 A row that traces to nothing does not ship.
+
+### The quality gate names things
+
+A yes/no checklist passes on a flat build — every answer can be "yes" while the work is
+still generic. So the gate asks for names instead:
+
+1. Name the signature interaction, and why it fits this product.
+2. Name the motion system: easing family, duration scale, what deliberately does not move.
+3. Name the one detail a user would describe from memory tomorrow.
+4. Name the Failure Gallery row this build came closest to, and what you did instead.
+5. Name the sources behind every major choice.
+6. Name the first visible difference between this and a default starter template.
+
+An answer you cannot write down does not exist. "The colors" is a failing answer to #6.
 
 ## What it deliberately does not do
 
@@ -104,6 +142,10 @@ A row that traces to nothing does not ship.
 - **Does not fake imagery.** If a direction needs a photograph and there is no budget for
   one, it keeps an honest sized placeholder with art direction rather than a CSS gradient
   pretending to be a hero image.
+- **Does not accept "clean and minimal" as a finished answer.** Restraint is only valid when
+  the surface tier calls for it, and the tier has to be named.
+- **Does not treat Mobbin's missing motion data as permission to ship static work.** The gap
+  changes where motion is sourced from, not whether it exists.
 
 ## What is included
 
@@ -111,10 +153,12 @@ A row that traces to nothing does not ship.
 skills/mobbin-design/
   SKILL.md                        the methodology and tool routing
   references/
+    exceptional-bar.md            REQUIRED — worked code exemplars + Failure Gallery
+    motion-signature.md           REQUIRED — surface tiers, signature moves, motion lock
     mcp-tools.md                  full parameter reference for the three Mobbin tools
     example-workflow.md           an end-to-end worked example
     typography.md   color.md      craft references, loaded on demand
-    motion.md       icons.md
+    motion.md       icons.md      motion.md is the safety/restraint half
     craft-details.md              forms, focus, images, touch, performance, a11y
     copywriting.md                copy and persuasion
     anti-ai-slop.md               generic-AI-design checks
@@ -123,8 +167,15 @@ skills/mobbin-design/
 .claude-plugin/                   Claude Code plugin + marketplace manifests
 ```
 
-The craft references load only when relevant — the skill does not pull all of them into
-context by default.
+The two marked REQUIRED load before implementation on any surface with visible design
+intent. The rest load only when relevant — the skill does not pull all of them into context
+by default.
+
+`exceptional-bar.md` is the one that does the most work. It holds five worked exemplars —
+scroll-linked hero, coordinated card hover, shared-element tab morph, a restrained data
+surface, and the memorable detail — each with a note on the transferable move, plus a Failure
+Gallery cataloguing what "basic" actually looks like in output. Adjectives compress to
+nothing during generation; a working artifact in context does not.
 
 ## Gotchas worth knowing
 
@@ -135,6 +186,12 @@ context by default.
   anything nuanced.
 - Images cost context. Keep `limit` around 8–12 while exploring; several sharp queries beat
   one broad query with a high limit.
+- **Analyze in batches of 2–3 and write notes as text before searching again.** Text survives
+  context compaction; base64 images do not. Accumulating every result and synthesizing at the
+  end means the images are gone when it matters, and the agent silently falls back to
+  designing from metadata — the exact failure the skill exists to prevent.
+- There is no color-extraction, taxonomy-filter, or per-app drill-down tool on the official
+  server. Sample colors by eye and commit them as hex or oklch values.
 
 ## Credits
 
@@ -144,6 +201,14 @@ quality gate — is adapted from the MIT-licensed
 craft references are reused from it with minor edits. The Mobbin research layer, tool
 routing, and workflow were rewritten for Mobbin's tool surface, which is materially
 different: Refero returns structured style documents, Mobbin returns screenshots.
+
+Two other Mobbin projects informed later revisions. The incremental batch-analysis rule and
+the concrete-visual query formula are adapted from
+[ddruids/mobbin-skill](https://github.com/ddruids/mobbin-skill). The manual color-sampling
+discipline is adapted from
+[pdcolandrea/mobbin-mcp](https://github.com/pdcolandrea/mobbin-mcp), which offered dominant
+color extraction as a tool; that project is archived and now points users at Mobbin's
+official server, so the technique is kept and the dependency is not.
 
 See [NOTICE](NOTICE) for the per-file attribution.
 
