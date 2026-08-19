@@ -45,9 +45,12 @@ Then **look at the screenshots**. Not the app names - the pixels.
 What inspection turns up (stated as reasoned estimates, because these are screenshots and
 not token files):
 
-- Things 3: generous line height, roughly 20-24px vertical rhythm between rows, one blue
-  accent used *only* for the active/selected state, everything else near-black on white.
-  Type carries the whole hierarchy; almost no borders.
+- Things 3: generous rhythm, roughly 20-24px between rows; two-line rows pairing a near-black
+  title with small gray metadata. Type carries the hierarchy - dividers are largely absent and
+  whitespace does the separating. Color is *role-assigned rather than scarce*: blue for
+  checkbox outlines and the FAB, red for "today" urgency markers, yellow for the Today star,
+  pale green for tag pills. Each color means exactly one thing, and none is decorative. That
+  is the trait worth taking - not "one accent", but **every accent owning a single role**.
 - Oak: near-black canvas, very large thin numerals, a single warm amber accent, enormous
   negative space. Calm comes from emptiness, not from soft colors.
 - Bear: warm off-white, serif display over sans body, hairline dividers, content-forward.
@@ -169,7 +172,7 @@ styling.
 | Decision | Source | Source rule / role | Why |
 |---|---|---|---|
 | Warm near-white canvas, type-led hierarchy | Things 3 direction screens | canvas + type own the system; no border chrome | Calm without going dark; audience wants competent, not moody |
-| Single blue, selection state only | Things 3 accent discipline | accent never becomes CTA or badge fill | Keeps the one moment of color meaningful; blocks badge creep |
+| Single blue, selection state only | Things 3 accent discipline — *adapted, not copied*: Things 3 runs four role-assigned accents; this takes the one-role-per-color principle with a smaller palette | accent never becomes CTA or badge fill | Audience quit color-coded streak systems, so the principle survives while the count shrinks |
 | Near-black CTA | Reference lock role rule | CTA is not the accent | Prevents the accent from being diluted into a button |
 | Three-stage trial timeline on paywall | Paywall pattern pass | timeline is an explainer block, not decoration | Directly answers the "I'll get charged unnoticed" objection |
 | Annual pre-selected, toggle above cards | Paywall pattern pass | toggle above, savings badge on annual | Convention users already read fluently; no invention needed |

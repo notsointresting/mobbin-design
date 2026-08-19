@@ -2,3 +2,6 @@
 Thumbs.db
 *.skill
 node_modules/
+
+# j-space ledger (local working state)
+.jspace/
