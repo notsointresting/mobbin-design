@@ -119,7 +119,8 @@ Motion direction is therefore sourced differently from visual direction:
 
 1. **Name a product whose motion language you are targeting** and describe it concretely.
    "Linear's command palette: instant open, no scale-in, content cross-fades on a 120ms
-   curve" is a usable source. "Smooth and modern" is not.
+   curve" is a usable source. "Smooth and modern" is not. A catalog of named motion languages,
+   each described in enough detail to cite, is in [motion-library.md](motion-library.md).
 2. **Derive from the visual lock.** A dense, precise, hairline-bordered direction implies
    fast, small, mechanical motion. A generous, high-contrast, expressive direction implies
    slower, larger, springier motion. The visual system constrains the motion system — say how.

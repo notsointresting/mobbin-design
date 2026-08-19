@@ -23,8 +23,18 @@ and worked code exemplars that set the quality target with artifacts rather than
 /plugin install mobbin-design@mobbin-design
 ```
 
-This installs the skill and registers the Mobbin MCP server. Run `/mcp` and sign in to
-Mobbin when prompted.
+This installs the skill, two slash commands, and registers the Mobbin MCP server. Run `/mcp`
+and sign in to Mobbin when prompted.
+
+### Commands
+
+| Command | What it does |
+|---------|--------------|
+| `/mobbin-research <what you are designing>` | Runs the full research protocol and writes a `DESIGN.md` lock. Stops before implementation — the deliverable is research, not code. |
+| `/design-audit <file, directory, URL, or screenshot>` | Reads an existing build, infers its system, researches its specific weaknesses, and reports classified, prioritized findings. |
+
+The skill also activates automatically on design work; the commands exist for when you want
+research and building to happen on different days, or when the target already exists.
 
 ### As a standalone skill
 
@@ -107,6 +117,35 @@ Marketing and hero surfaces default **up** the motion tiers; dense product UI de
 basic-looking output, and an empty `Signature move` line means the build is not ready to
 start.
 
+### DESIGN.md — the lock that survives compaction
+
+A lock that lives only in conversation dies at the first compaction or session boundary. Turn
+40 then has no access to what turn 3 decided, re-derives from model priors, and lands back on
+the average. That is how locked directions drift — not by being overruled, by being forgotten.
+
+For work that outlives one session, the skill writes `DESIGN.md` to project root before
+implementing: brief, reference lock, motion lock, a token table with **role rules**, the
+decision ledger, and a research index of every screen reviewed with its one-line finding. It
+is read back at the start of every subsequent design turn, and the reject list and role rules
+are restated before any code is written.
+
+The research index is the quiet win — without it, session three re-runs session one's
+searches, gets a different result set, and locks a different direction by accident.
+
+### Drift check, mid-build
+
+The quality gate runs before handoff, by which point drift has been compounding for hours.
+`drift-check.md` runs at each completed surface instead, and most of it is mechanical:
+
+```bash
+grep -rhoE '#[0-9a-fA-F]{3,8}\b' src/ | sort | uniq -c | sort -rn
+```
+
+A build with a locked seven-value palette that greps twenty-three distinct hex codes has
+drifted, and the count says by how much before you have looked at a single pixel. Reject-list
+hits and token-role escapes are fixed immediately, because every subsequent component copies
+the drifted pattern beside it.
+
 ### Decision ledger
 
 Every significant choice traces to a source before build starts:
@@ -146,15 +185,26 @@ An answer you cannot write down does not exist. "The colors" is a failing answer
   the surface tier calls for it, and the tier has to be named.
 - **Does not treat Mobbin's missing motion data as permission to ship static work.** The gap
   changes where motion is sourced from, not whether it exists.
+- **Does not assume greenfield.** Most real work has a build already. The audit path reads
+  what exists and names its strongest trait before criticizing anything, because a redesign
+  that discards a build's one good instinct is worse than no redesign.
+- **Does not trust its own memory across sessions.** The lock is a file, not a recollection.
 
 ## What is included
 
 ```
+commands/
+  mobbin-research.md              /mobbin-research — research to a committed lock, no code
+  design-audit.md                 /design-audit — audit an existing build
 skills/mobbin-design/
   SKILL.md                        the methodology and tool routing
   references/
     exceptional-bar.md            REQUIRED — worked code exemplars + Failure Gallery
     motion-signature.md           REQUIRED — surface tiers, signature moves, motion lock
+    design-md.md                  the DESIGN.md lock template and its rules
+    design-audit.md               brownfield protocol — read the build, then research
+    drift-check.md                mid-build mechanical check against the reject list
+    motion-library.md             named motion languages, described concretely enough to cite
     mcp-tools.md                  full parameter reference for the three Mobbin tools
     example-workflow.md           an end-to-end worked example
     typography.md   color.md      craft references, loaded on demand

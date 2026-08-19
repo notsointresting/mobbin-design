@@ -75,6 +75,18 @@ research burden.
 - **Read the bar before building.** For any surface with visible design intent, read
   [references/exceptional-bar.md](references/exceptional-bar.md) before writing
   implementation code. Prose targets do not raise output quality; worked artifacts do.
+- **Persist the lock when the work outlives the session.** For a new product surface, a
+  multi-screen redesign, or anything a future session will touch, write the reference lock,
+  motion lock, tokens, decision ledger, and research index to a `DESIGN.md` at project root
+  before implementing — see [references/design-md.md](references/design-md.md). A lock that
+  lives only in conversation dies at the first compaction, and the build then re-derives from
+  model priors, which is the exact average this skill exists to escape.
+- **Check for an existing `DESIGN.md` first.** If the project has one, read it in full before
+  designing anything, and restate its reject list and role rules before writing code. If the
+  task conflicts with the lock, say so and ask rather than quietly softening the lock to fit.
+- **Re-check for drift while building, not only at handoff.** At each surface completed, run
+  the check in [references/drift-check.md](references/drift-check.md). Drift is cheap to fix
+  early and expensive later, because each new component copies the drifted pattern beside it.
 - **Synthesize before implementation.** Turn research into a concept, token direction, and
   concrete decision ledger before drawing or coding.
 - **A brief is not a build target.** Before implementation, lock either a user-provided
@@ -144,7 +156,10 @@ Choose the lightest workflow that can produce a high-quality result.
   major redesign, a landing page, or another high-visibility surface with several plausible
   directions. Default to three reference-locked options and ask the user to choose; see
   [references/visual-workflow.md](references/visual-workflow.md).
-- **Audit:** use captured screenshots, Mobbin screens, or flows as evidence before critique.
+- **Audit:** use when a build, screenshot, or URL already exists — "make this better", a
+  redesign, a review, or a check against an existing lock. Read the build and infer its system
+  **before** researching; research done first anchors you to an imagined product. Full
+  protocol: [references/design-audit.md](references/design-audit.md).
 - **Asset generation:** use generated imagery only when the reference lock requires bitmap
   media that code, icons, or existing assets cannot faithfully provide; see
   [references/visual-workflow.md](references/visual-workflow.md).
@@ -605,6 +620,16 @@ before writing implementation code:
   exemplars at the target quality, plus the Failure Gallery of what basic output looks like.
 - **Signature motion:** [references/motion-signature.md](references/motion-signature.md) —
   surface tiers, the qualifying-move catalog, and how to source motion when Mobbin cannot.
+
+Load these when the situation calls for them:
+
+- Persisting the lock: [references/design-md.md](references/design-md.md) — the `DESIGN.md`
+  template and the rules that keep it trustworthy.
+- Auditing an existing build: [references/design-audit.md](references/design-audit.md).
+- Mid-build drift: [references/drift-check.md](references/drift-check.md) — mechanical,
+  greppable, run at each completed surface.
+- Motion sources: [references/motion-library.md](references/motion-library.md) — named motion
+  languages described concretely enough to cite.
 
 Load the rest only when relevant:
 
